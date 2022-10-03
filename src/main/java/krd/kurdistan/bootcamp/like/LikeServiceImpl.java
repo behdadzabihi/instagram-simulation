@@ -40,6 +40,12 @@ public class LikeServiceImpl implements LikeService {
     public Like update(Like like) {
         Like lastLike= findById(like.getId());
         lastLike.setIsFavorite(like.getIsFavorite());
+        Long userId=like.getUserApp().getId();
+        Long plcId=like.getPost().getId();
+        UserApp userApp=userAppService.findById(userId);
+        Post post=postService.findById(plcId);
+        lastLike.setUserApp(userApp);
+        lastLike.setPost(post);
         return repository.save(lastLike);
     }
 

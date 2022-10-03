@@ -38,7 +38,13 @@ public class CommentServiceImpl implements CommentService {
        Comment lastComment= findById(comment.getId());
         lastComment.setDate(comment.getDate());
         lastComment.setMessage(comment.getMessage());
-        return lastComment;
+        Long userId=comment.getUserApp().getId();
+        Long postId=comment.getPost().getId();
+        UserApp userApp=userAppService.findById(userId);
+        Post post=postService.findById(postId);
+        lastComment.setPost(post);
+        lastComment.setUserApp(userApp);
+        return repository.save(lastComment);
     }
 
     @Override

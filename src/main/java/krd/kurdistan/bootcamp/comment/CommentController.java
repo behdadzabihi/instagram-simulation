@@ -2,8 +2,6 @@ package krd.kurdistan.bootcamp.comment;
 
 
 import krd.kurdistan.bootcamp.common.PagingData;
-import krd.kurdistan.bootcamp.like.Like;
-import krd.kurdistan.bootcamp.like.LikeDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -41,7 +39,7 @@ public class CommentController {
 
 
     @GetMapping("vi/filter-by-place/{page}/{size}/{postId}")
-    public ResponseEntity<PagingData<CommentDTO>> getByPlace(@PathVariable Integer page, @PathVariable Integer size,@PathVariable Long postId){
+    public ResponseEntity<PagingData<CommentDTO>> getByPost(@PathVariable Integer page, @PathVariable Integer size, @PathVariable Long postId){
         Page<Comment> commentPage=service.findByPost(page,size,postId);
         int total=commentPage.getTotalPages();
         List<Comment> comments=commentPage.getContent();
